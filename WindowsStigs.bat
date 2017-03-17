@@ -30,7 +30,6 @@ echo. & echo Cleaning Scheduled Tasks
 REM Get rid of microsoft and internet browser tasks from the query
 schtasks /query /Fo list | find "TaskName:" | find /V /I "Microsoft" | find /V /I "Windows" | find /V /I "Scoring" | find /V /I "Google" | find /V /I "Firefox" | find /V /I "Opera" > %APPDATA%\stasks.txt
 echo. > %APPDATA%\stasks2.txt
-REM I hate batch
 
 REM Pick out task directories
 REM Look up ENABLEDELAYEDEXPANSION to understand why my variable syntax changes from % to !
@@ -44,7 +43,7 @@ for /F "tokens=*" %%T in (%APPDATA%\stasks.txt) do (
 REM Remove the remaining tasks
 for /F "tokens=*" %%T in (%APPDATA%\stasks2.txt) do (
 	set tempy=%%T
-	REM for some reason, the transfer of variable > file adds a space.  I hate batch.
+	REM for some reason, the transfer of variable > file adds a space.
 	schtasks /Delete /TN "!tempy:~0,-1!" /F >> nul 2>&1
 )
 ENDLOCAL
@@ -65,7 +64,6 @@ dir /B "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Startup\" >> %cd%\S
 del /S "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Startup\*" /F /Q
 dir /B "C:\Users\%username%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\" >> %cd%\ScriptOutput\deletedfiles.txt
 del /S "C:\Users\%username%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\*" /F /Q
-REM I'm fairly sure that will cover start-up programs; but we'll find out.
 echo. & echo Startup files cleansed
 echo --------------------------------------------------------------------------------
 
@@ -145,7 +143,7 @@ reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Internet Settings" /V Wa
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Internet Settings" /V WarnOnPostRedirect /T REG_DWORD /D 1 /F >> nul 2>&1
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Internet Settings" /V WarnonZoneCrossing /T REG_DWORD /D 1 /F >> nul 2>&1
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Internet Settings" /V DisablePasswordCaching /T REG_DWORD /D 1 /F >> nul 2>&1
-REM Internet explorer my babes
+REM Internet explorer
 auditpol /set /category:* /success:enable >> nul 2>&1
 auditpol /set /category:* /failure:enable >> nul 2>&1
 reg add "HKLM\Software\Microsoft\Windows NT\Current Version\Winlogon\" /V CachedLogonsCount /T REG_SZ /D 0 /F >> nul 2>&1
@@ -300,8 +298,7 @@ echo ---------------------------------------------------------------------------
 
 echo. & echo Configuring services
 
-REM Services that should be burned at the stake. ew fax
-REM Why does Windows 10 have so many terrible services?
+REM Services that should be burned at the stake.
 for %%S in (tapisrv,bthserv,mcx2svc,remoteregistry,seclogon,telnet,tlntsvr,p2pimsvc,simptcp,fax,msftpsvc,nettcpportsharing,iphlpsvc,lfsvc,bthhfsrv,irmon,sharedaccess,xblauthmanager,xblgamesave,xboxnetapisvc) do (
 	sc config %%S start= disabled >> nul 2>&1
 	sc stop %%S >> nul 2>&1
