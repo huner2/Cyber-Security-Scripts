@@ -18,3 +18,6 @@ This program is written for Python 3 and for Ubuntu 14.04.5(x32) as the hashes d
 <br>
 ### Debianhf.py
 This program is written for Python 3 and for Debian 7.6(x32) as the hashes differ in different versions. <br> This program checks all the files it can access on the system against a list of md5 hashes. <br> It is essentially acting as a rudimentary anti-virus. <br> The program will print the location of a found vulnerability and also print it to an output file.
+<br>
+
+<div class="LI-profile-badge"  data-version="v1" data-size="medium" data-locale="en_US" data-type="horizontal" data-theme="dark" data-vanity="hrross86"><a class="LI-simple-link" href='https://www.linkedin.com/in/hrross86?trk=profile-badge'>Hunter Ross on LinkedIn</a></div>
