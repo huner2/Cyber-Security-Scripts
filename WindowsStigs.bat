@@ -345,7 +345,6 @@ echo ---------------------------------------------------------------------------
 
 :end
 echo. & echo The paths of files that were deleted can be found in %cd%\ScriptOutput\deletedfiles.txt
-echo. & echo I turned off the IP-helper service--if something blows up, re-enable it.
 echo. & echo When you press a key, the Windows Features window will open.  If you don't want to change anything, just hit cancel.
 pause
 optionalfeatures.exe
