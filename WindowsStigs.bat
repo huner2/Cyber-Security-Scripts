@@ -2,7 +2,7 @@
 cls
 
 net session >> nul 2>&1
-if %errorLevel% == 0 ( echo. ) else ( echo Run me as an admin, you loser. & goto :end)
+if %errorLevel% == 0 ( echo. ) else ( echo Run me as an admin. & goto :end)
 echo. > %cd%\ScriptOutput\deletedfiles.txt
 
 echo Starting script
